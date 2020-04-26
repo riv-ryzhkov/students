@@ -8,3 +8,8 @@ class Student(models.Model):
     phone = models.CharField(max_length=20, default='')
 
 
+    def info(self):
+        return f'{self.id} {self.first_name} {self.last_name} {self.age} {self.email} {self.phone} {self.rating}'
+
+
+
