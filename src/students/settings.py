@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'django_extensions',
+    'silk',
 
     'students_app',
     'teachers',
@@ -56,6 +57,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'teachers.middlewares.SimpleMiddleware',
+    'silk.middleware.SilkyMiddleware',
+    # 'teachers.middlewares.Logger',
+    # 'silk.middleware.SilkyMiddleware',
 
 ]
 
@@ -84,11 +89,26 @@ WSGI_APPLICATION = 'students.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'd1': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'teachers',
+        'USER': 'teacher_user',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    },
 }
+'''
+name = teachers
+user = teacher_user
+password = password
+
+'''
+
 
 
 # Password validation

@@ -16,6 +16,8 @@ def clear(request):
     return
 
 
+
+
 def run(request):
     # Teacher.objects.all().delete()
     for i in range(5):

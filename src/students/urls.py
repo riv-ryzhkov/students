@@ -25,8 +25,12 @@ urlpatterns = [
     path('create-groupe/', create_groupe, name='create-groupe'),
     path('teacher-edit/<int:pk>/', teacher_edit, name='teacher-edit'),
     path('groupe-edit/<int:pk>/', groupe_edit, name='groupe-edit'),
+    path('silk/', include('silk.urls', namespace='silk')),
+
 
 ]
+
+# urlpatterns += [url(r'^silk /', include('silk.urls', namespace = 'silk'))]
 
 if settings.DEBUG:
     import debug_toolbar
