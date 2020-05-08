@@ -6,6 +6,7 @@ from students_app.models import Student
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
+# from students.tasks import django_sleep
 
 def teacher_(request):
     t = Teacher.objects.create(first_name='Ivan', last_name='Petrov', age=32, phone='77686565', rating=5)
@@ -15,6 +16,18 @@ def teacher_(request):
 def clear(request):
     return
 
+
+
+
+
+def slow_view(request):
+    pass
+#     from time import sleep
+    # from time import time
+    # django_sleep.delay(5)
+    # sleep(5) Это я игрался, смотрел какая задержка получается...
+    #
+    # return HttpResponse('Time is ' + str(time()))
 
 
 

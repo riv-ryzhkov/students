@@ -3,6 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator, validat
 import re
 from time import time
 
+from django.db.models import CharField
+
 
 class Teacher(models.Model):
     first_name = models.CharField(max_length=128)
@@ -20,6 +22,12 @@ class Teacher(models.Model):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+class Log(models.Model):
+    path = models.CharField(max_length=128)
+    method = models.CharField(max_length=128)
+    time_delta = models.CharField(max_length=128)
+    created = models.DateTimeField(auto_now_add=True)
+
 
 class Logger(models.Model):
     path = models.CharField(max_length=128)
@@ -27,20 +35,30 @@ class Logger(models.Model):
     time_delta = models.CharField(max_length=128)
     created = models.DateTimeField(auto_now_add=True)
 
-    def __init__(self, get_response):
-        self.get_response = get_response
+
+    def info(self):
+        return f'{self.id} {self.path} {self.method} {self.time_delta} {self.created}'
+
+    def __str__(self):
+        return f'{self.path} {self.method} {self.time_delta} {self.created}'
+
+    # def __init__(self, get_response):
+    #     self.get_response = get_response
 
 
-    def log(self, request):
-        self.path = request.path()
-        self.method = request.method()
-        start = time()
-        response = self.get_response(request)
-        end = time()
-        self.time_delta = end - start
-        self.created = time()
 
-        return response
+    # def log(self, request):
+    #     self.path = request.path()
+    #     self.method = request.method()
+    #     start = time()
+    #     response = self.get_response(request)
+    #     end = time()
+    #     self.time_delta = end - start
+    #     self.created = time()
+    #
+    #     return response
+    # @classmethod
+
 
 #
 

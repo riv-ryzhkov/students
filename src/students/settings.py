@@ -58,11 +58,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'teachers.middlewares.SimpleMiddleware',
-    'silk.middleware.SilkyMiddleware',
-    # 'teachers.middlewares.Logger',
     # 'silk.middleware.SilkyMiddleware',
+    # 'teachers.middlewares.Logger',
+    'silk.middleware.SilkyMiddleware',
 
 ]
+
+
+
 
 ROOT_URLCONF = 'students.urls'
 
@@ -108,6 +111,18 @@ user = teacher_user
 password = password
 
 '''
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
+
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+    'beat': {
+        'task': 'students.tasks.beat',
+        'schedule': crontab(minute=0, hour='*/1'),
+        # 'schedule': crontab(minute='*/1'),
+    }
+}
 
 
 

@@ -7,3 +7,6 @@ class TeachersConfig(AppConfig):
 
     def ready(self):
         import teachers.signals
+
+# class LoggerConfig(AppConfig):
+#     name = 'teachers'

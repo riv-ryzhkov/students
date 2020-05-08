@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from groupes.models import Groupe
 from teachers.models import Teacher
+from teachers.models import Logger
 from teachers.forms import TeacherForm
 
 
@@ -21,10 +22,17 @@ class TeacherAdmin(admin.ModelAdmin):
     list_per_page = 10
     form = TeacherForm
 
+class LoggerAdmin(admin.ModelAdmin):
+    list_display = ('path', 'method', 'time_delta', 'created')
+    list_per_page = 10
+
+
 
 
 admin.site.register(Teacher, TeacherAdmin)
 
 admin.site.register(Groupe, GroupeAdmin)
+
+admin.site.register(Logger, LoggerAdmin)
 
 # Register your models here.
